@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Request Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <div>
+            <h1>Purchase Request Management</h1>
+        </div>
+        <nav class="tabs" aria-label="Dashboard navigation">
+            <button class="tab active" data-view="createView">Dashboard 1 <span>Create request</span></button>
+            <button class="tab" data-view="reviewView">Dashboard 2 <span>Review requests</span></button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section id="createView" class="view">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">NEW REQUEST</p>
+                    <h2>Create purchase request</h2>
+                </div>
+            </div>
+            <form id="requestForm" class="panel">
+                <div class="form-grid">
+                    <label> PR No.
+            <input id="prNo" name="prNo" type="text" inputmode="numeric" pattern="[0-9]+" autocomplete="off" placeholder="Eg: 10001" required>
+          </label>
+                    <label>Department
+            <select id="department" required>
+              <option value="">Select department</option>
+              <option>IT</option>
+              <option>Finance</option>
+              <option>Human Resources</option>
+              <option>Operations</option>
+              <option>Marketing</option>
+              <option>Administration</option>
+            </select>
+          </label>
+                    <label>Ranking by
+            <input id="rankingBy" name="rankingBy" type="text" placeholder="Enter ranking" required maxlength="100">
+          </label>
+                </div>
+
+                <div class="table-title">
+                    <div>
+                        <p class="eyebrow">LINE ITEMS</p>
+                        <h3>Material details</h3>
+                    </div>
+                    <button type="button" id="addRowBtn" class="button button-light">+ Add material</button>
+                </div>
+                <div class="table-wrap">
+                    <table class="materials-table">
+                        <thead>
+                            <tr>
+                                <th>S.No.</th>
+                                <th>Material description</th>
+                                <th>Unit</th>
+                                <th>Quantity</th>
+                                <th>Net price (₹)</th>
+                                <th>Total (₹)</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="materialsBody"></tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5" class="grand-label">Grand total</td>
+                                <td id="grandTotal">₹0.00</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="form-actions">
+                    <p class="hint">Save draft to finish later, or submit it for review on Dashboard 2.</p>
+                    <div class="button-group">
+                        <button type="button" id="saveDraftBtn" class="button button-light">Save draft</button>
+                        <button type="submit" class="button button-primary">Submit for review</button>
+                    </div>
+                </div>
+                <p id="formMessage" class="message" role="status"></p>
+            </form>
+        </section>
+
+        <section id="reviewView" class="view hidden">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">REVIEW WORKFLOW</p>
+                    <h2>Purchase requests</h2>
+                    <p class="subheading">Requests submitted on Dashboard 1 appear here automatically.</p>
+                </div>
+                <button id="refreshBtn" class="button button-light">↻ Refresh</button>
+            </div>
+            <div class="stats">
+                <div class="stat-card"><span>Total requests</span><strong id="totalCount">0</strong></div>
+                <div class="stat-card"><span>Pending review</span><strong id="pendingCount">0</strong></div>
+                <div class="stat-card"><span>Accepted</span><strong id="acceptedCount">0</strong></div>
+                <div class="stat-card"><span>Rejected</span><strong id="rejectedCount">0</strong></div>
+            </div>
+            <div class="panel">
+                <div class="review-toolbar">
+                    <h3>All material requests</h3>
+                    <select id="statusFilter" aria-label="Filter by status">
+            <option value="All">All statuses</option><option>Pending</option><option>Draft</option><option>Accepted</option><option>Rejected</option>
+          </select>
+                </div>
+                <div class="table-wrap">
+                    <table class="review-table">
+                        <thead>
+                            <tr>
+                                <th>PR No.</th>
+                                <th>Department</th>
+                                <th>Ranking</th>
+                                <th>Material description</th>
+                                <th>Unit</th>
+                                <th>Qty</th>
+                                <th>Net price</th>
+                                <th>Total</th>
+                                <th>Status / action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="requestsBody"></tbody>
+                    </table>
+                </div>
+                <p id="reviewMessage" class="message" role="status"></p>
+            </div>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+
+</html>

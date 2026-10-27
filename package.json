@@ -1,0 +1,12 @@
+{
+  "name": "purchase-request-dashboard",
+  "version": "1.0.0",
+  "description": "Two-dashboard purchase request app using HTML, CSS, JavaScript, Express and MongoDB Atlas",
+  "main": "server.js",
+  "scripts": { "start": "node server.js", "dev": "node --watch server.js" },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.5"
+  }
+}
